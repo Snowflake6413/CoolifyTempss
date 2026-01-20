@@ -1,0 +1,27 @@
+# documentation: https://docs.sillytavern.app/
+# slogan: SillyTavern is a user interface you can install on your computer (and Android phones) that allows you to interact with text generation AIs and chat/roleplay with characters you or the community create.
+# category: ai
+# tags: ai, chatbot, llm, roleplay, character
+# logo: https://docs.sillytavern.app/static/banner.jpg
+# port: 8000
+
+services:
+  sillytavern:
+    image: ghcr.io/sillytavern/sillytavern:latest
+    environment:
+      - NODE_ENV=${NODE_ENV:-production}
+    volumes:
+      - sillytavern-config:/home/node/app/config
+      - sillytavern-data:/home/node/app/data
+      - sillytavern-plugins:/home/node/app/plugins
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  sillytavern-config:
+  sillytavern-data:
+  sillytavern-plugins:

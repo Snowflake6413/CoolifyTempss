@@ -9,13 +9,14 @@ services:
   sillytavern:
     image: ghcr.io/sillytavern/sillytavern:latest
     environment:
+      - SERVICE_URL_SILLYTAVERN_8000
       - NODE_ENV=${NODE_ENV:-production}
     volumes:
       - sillytavern-config:/home/node/app/config
       - sillytavern-data:/home/node/app/data
       - sillytavern-plugins:/home/node/app/plugins
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8000 || exit 1"]
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8000 || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3

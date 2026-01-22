@@ -21,7 +21,7 @@ services:
           dataRoot: ./data
           # -- SERVER CONFIGURATION --
           # Listen for incoming connections
-          listen: false
+          listen: true
           # Listen on a specific address, supports IPv4 and IPv6
           listenAddress:
             ipv4: 0.0.0.0
